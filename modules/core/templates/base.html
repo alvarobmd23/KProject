@@ -1,0 +1,62 @@
+{% load static %}
+<!-- https://getbootstrap.com/docs/4.0/getting-started/introduction/#starter-template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'images/fav.ico' %}">
+  <title>Kontrole</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Font-awesome -->
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  {% block css %}{% endblock css %}
+
+  </body>
+</head>
+<body>
+
+  {% include "includes/nav.html" %}
+  
+  <!-- Pop-up de Mensagens e avisos -->
+  <div class="fixed-top" style="margin-top:60px">
+    <div class="container w-25 float-right">
+      <div class="row">
+        {% if messages %}
+          {% for message in messages %}
+            <div id="message_container" class="alert alert-{{ message.tags }} border-0 p-1 m-2 shadow fade show" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:60px">
+    {% block content %}{% endblock content %}
+  </div>
+  {% include "includes/footer.html" %}
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+  <!-- Script para sumir com o pop-up de mensagens em 3 segundos -->
+  <script>
+    var message_ele = document.getElementById("message_container");
+
+    setTimeout(function(){ 
+        message_ele.style.display = "none"; 
+    }, 3000);
+  </script>
+
+  {% block js %}{% endblock js %}
+
+</body>
+</html>

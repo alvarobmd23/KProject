@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <style type="text/css">
+        .btn-circle.btn-xl {
+            width: 50px;
+            height: 50px;
+            padding: 10px 17px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+<div class="bg-light">
+    <h2><u>Chart of Accounts</u></h2>
+</div>
+<div class="col align-baseline">
+    {% regroup objects by typeaccount__typeaccount as account_list %}
+    <ul class="list-group">
+        {% for c in account_list %}
+        <li class="list-group-item"><span class="font-weight-bold">{{ c.grouper }}</span>
+            {% regroup c.list by sintetic as sintetic_list %}
+            <ul class="list-group">
+                {% for s in sintetic_list %}
+                <li class="list-group-item"><span class="font-weight-normal">{{ s.grouper }}</span>
+                         {% regroup s.list by id as id_list %}
+                            {% for j in id_list %}       
+                                <a class="btn btn-primary btn-sm" href="/finance/accounts/sintetic_update/{{ j.grouper }}"><i class="fas fa-edit text-light"></i></a>
+                                <a class="btn btn-danger btn-sm" href="/finance/accounts/sintetic_delete/{{ j.grouper }}"><i class="fas fa-trash-alt text-light"></i></a>
+                            {% endfor %} 
+                    <ul class="list-group">
+                    {% for a in s.list %}
+                        <li class="list-group-item">
+                        {% if a.analitic__analitic != None %} 
+                            <span class="font-weight-light">{{ a.analitic__analitic }}</span>
+                            <a href="/finance/accounts/analitic_update/{{ a.analitic__id }}"><i class="fas fa-edit text-primary"></i></a>
+                            <a href="/finance/accounts/analitic_delete/{{ a.analitic__id }}"><i class="fas fa-trash-alt text-danger"></i></a>
+                        {% else %}
+                            <span class="font-weight-light">Cadastrar Conta ANALÍTICA</span>
+                        {% endif %}
+
+
+                        </li>
+                    {% endfor %}
+                    </ul> 
+                </li>
+                {% endfor %}
+            </ul>
+
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container fixed-bottom" style="margin-bottom:50px">
+    <div class="btn-group dropup float-right">
+        <button type="button" class="btn btn-primary btn-circle btn-xl rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="align-middle dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item btn btn-secondary" href="{% url 'accounts:analitic_new' %}"><i class="fa-solid fa-plus text-primary"></i> Analitic</a>
+            <a class="dropdown-item btn btn-secondary" href="{% url 'accounts:sintetic_new' %}"><i class="fa-solid fa-plus text-primary"></i> Sintetic</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

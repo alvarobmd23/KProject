@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Company (models.Model):
-    company_name = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=100, unique=True)
     company_nickname = models.CharField(max_length=100)
     logo = models.FileField
 
@@ -48,6 +48,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
+    name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(_('email address'), unique=True)
     company = models.OneToOneField(
         Company, on_delete=models.PROTECT, blank=True, null=True)
