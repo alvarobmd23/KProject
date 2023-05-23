@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     # My apps
     'users.apps.UsersConfig',
+    'modules.core',
 ]
 
 MIDDLEWARE = [

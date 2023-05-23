@@ -1,7 +1,20 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+
+class Company (models.Model):
+    company_name = models.CharField(max_length=100)
+    company_nickname = models.CharField(max_length=100)
+    logo = models.FileField
+
+    def get_absolute_url(self):
+        return reverse("")
+
+    def __str__(self):
+        return self.company_name
 
 
 class UserManager(BaseUserManager):
@@ -36,6 +49,8 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
+    company = models.OneToOneField(
+        Company, on_delete=models.PROTECT, blank=True, null=True)
 
     objects = UserManager()
 
