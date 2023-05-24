@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'modules.core',
     # My apps - FINANCE
     'modules.finance.accounts',
+    'modules.finance.entrys',
 ]
 
 MIDDLEWARE = [

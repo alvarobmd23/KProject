@@ -7,7 +7,7 @@ from .forms import AnaliticForm, SinteticForm
 from .models import Analitic, Sintetic
 
 
-def indexview(request):
+def accountsview(request):
     company_user = Sintetic.objects.filter(
         company=request.user.company).order_by('typeaccount', 'sintetic', 'analitic')
     queryset = company_user.values(

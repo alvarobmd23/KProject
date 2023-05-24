@@ -17,13 +17,13 @@
 <div class="bg-light">
     <h2><u>Chart of Accounts</u></h2>
 </div>
-<div class="col align-baseline">
+<div class="col" style="z-index:999">
     {% regroup objects by typeaccount__typeaccount as account_list %}
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
         {% for c in account_list %}
         <li class="list-group-item"><span class="font-weight-bold">{{ c.grouper }}</span>
             {% regroup c.list by sintetic as sintetic_list %}
-            <ul class="list-group">
+            <ul class="list-group list-group-flush">
                 {% for s in sintetic_list %}
                 <li class="list-group-item"><span class="font-weight-normal">{{ s.grouper }}</span>
                          {% regroup s.list by id as id_list %}
@@ -31,7 +31,7 @@
                                 <a class="btn btn-primary btn-sm" href="/finance/accounts/sintetic_update/{{ j.grouper }}"><i class="fas fa-edit text-light"></i></a>
                                 <a class="btn btn-danger btn-sm" href="/finance/accounts/sintetic_delete/{{ j.grouper }}"><i class="fas fa-trash-alt text-light"></i></a>
                             {% endfor %} 
-                    <ul class="list-group">
+                    <ul class="list-group list-group-flush">
                     {% for a in s.list %}
                         <li class="list-group-item">
                         {% if a.analitic__analitic != None %} 
@@ -55,14 +55,14 @@
     </ul>
 </div>
 
-<div class="container fixed-bottom" style="margin-bottom:50px">
-    <div class="btn-group dropup float-right">
-        <button type="button" class="btn btn-primary btn-circle btn-xl rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div style="bottom:50px; right:30px; position:fixed; z-index:1000">
+    <div class="btn-group dropup position-relative float-right">
+        <button type="button" class="btn btn-primary btn-circle btn-xl rounded-circle text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa-solid fa-plus"></i>
         </button>
-        <div class="align-middle dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item btn btn-secondary" href="{% url 'accounts:analitic_new' %}"><i class="fa-solid fa-plus text-primary"></i> Analitic</a>
+        <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item btn btn-secondary" href="{% url 'accounts:sintetic_new' %}"><i class="fa-solid fa-plus text-primary"></i> Sintetic</a>
+            <a class="dropdown-item btn btn-secondary" href="{% url 'accounts:analitic_new' %}"><i class="fa-solid fa-plus text-primary"></i> Analitic</a>
         </div>
     </div>
 </div>

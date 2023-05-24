@@ -2,12 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from .views import (Analitic_Delete, Analitic_New, Analitic_Update,
-                    Sintetic_Delete, Sintetic_New, Sintetic_Update, indexview)
+                    Sintetic_Delete, Sintetic_New, Sintetic_Update,
+                    accountsview)
 
 app_name = 'accounts'
 
 urlpatterns = [
-    path('', login_required(indexview), name='accounts'),
+    path('', login_required(accountsview), name='accounts'),
     path('sintetic_new/', login_required(Sintetic_New.as_view()),
          name='sintetic_new'),
     path('sintetic_update/<int:pk>', login_required(Sintetic_Update.as_view()),
