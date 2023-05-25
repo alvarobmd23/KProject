@@ -1,22 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}
-    <style type="text/css">
-        .btn-circle.btn-xl {
-            width: 50px;
-            height: 50px;
-            padding: 10px 17px;
-            font-size: 18px;
-            text-align: center;
-        }
-    </style>
-{% endblock css %}
-
 {% block content %}
-<div class="bg-light">
-    <h2><u>Chart of Accounts</u></h2>
+
+<div class="page-header bg-light">
+    <h2><i class="fa-solid fa-chart-gantt"></i> Chart of Accounts</h2>
 </div>
+
 <div class="col" style="z-index:999">
     {% regroup objects by typeaccount__typeaccount as account_list %}
     <ul class="list-group list-group-flush">

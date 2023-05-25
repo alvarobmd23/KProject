@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-header bg-light">
+    <h2><i class="fa-regular fa-paste"></i> Document Type</h2>
+</div>
+{% if object_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Document Type</th>
+                <th class="text-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td><a href="{{ object.get_absolute_url }}">{{ object.document_type }}</a></td>
+                <td class="text-center">
+                    <a href="{% url 'entrys:document_type_edit' object.pk %}"><i class="fas fa-edit text-primary"></i></a>
+                    <a href="{% url 'entrys:document_type_delete' object.pk %}"><i class="fas fa-trash-alt text-danger"></i></a>
+                </td>
+            </tr>            
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% else %}
+    <p class="alert alert-warning">Sem tipos de documento cadastrado.</p>
+
+{% endif %}
+
+
+<div style="bottom:50px; right:30px; position:fixed; z-index:1000">
+    <div class="btn-group dropup position-relative float-right">
+        <button type="button" class="btn btn-primary btn-circle btn-xl rounded-circle text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item btn btn-secondary" href="{% url 'entrys:document_type_add' %}"><i class="fa-solid fa-plus text-primary"></i> Document Type</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+

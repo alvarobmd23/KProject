@@ -19,12 +19,13 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Finance</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{% url 'accounts:accounts' %}">Accounts</a>
+                  <a class="dropdown-item" href="{% url 'entrys:document_type' %}">Document Type</a>
                   <div class="dropdown-divider"></div>
                 </div>
               </li>
 
         </ul>
-        <a class="ml-auto"href=""><i class="fa-solid fa-user"></i> 
+        <a class="ml-auto text-light text-decoration-none" href=""><i class="fa-regular fa-circle-user"></i> 
         {% if user.name %}
             {{user.name}}
         {% else %}

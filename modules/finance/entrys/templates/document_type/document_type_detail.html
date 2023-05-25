@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="page-header bg-light">
+    <h2 class="d-inline">
+        <i class="fa-regular fa-paste"></i> Document Type - {{ object }}
+    </h2>
+    <span class="align-text-bottom float-right">
+        <a class="btn btn-danger" href="{% url 'entrys:document_type' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
+        <a class="btn btn-primary" href="{% url 'entrys:document_type_edit' object.pk %}"><i class="fas fa-edit"></i> Editar</a>
+    </span>
+</div>
+
+<div class="col-sm-6">
+    <table class="table table-user-information">
+        <tbody>
+            <tr>
+                <th class="text-right">
+                    Document Type
+                </th>
+                <td>
+                    {{ object }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+
+
+
+

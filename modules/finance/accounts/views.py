@@ -38,6 +38,10 @@ class Analitic_Update(UpdateView):
     model = Analitic
     form_class = AnaliticForm
 
+    def get_queryset(self):
+        company_user = self.request.user.company
+        return Analitic.objects.filter(company=company_user)
+
     def get_form_kwargs(self):
         kwargs = super(Analitic_Update, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})

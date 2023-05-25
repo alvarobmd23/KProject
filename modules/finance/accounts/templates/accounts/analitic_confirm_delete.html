@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <h1>Deletar Analitc Account - {{analitic.analitic}} </h1>
     <form method="post">
     {% csrf_token %}
     {{ form }}
     <br/>
-    <button type="submit" class="btn btn-danger">Confirmar</button>
-    <a href="{% url 'accounts:accounts'%}" class="btn btn-primary">Voltar</a>
+    <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> Confirmar</button>
+    <a class="btn btn-primary" href="{% url 'accounts:accounts' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
     </form>
+
 {% endblock content %}

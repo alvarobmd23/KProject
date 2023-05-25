@@ -24,5 +24,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('finance/accounts/',
          include('modules.finance.accounts.urls', namespace='accounts')),
+    path('finance/entrys/',
+         include('modules.finance.entrys.urls', namespace='entrys')),
 
 ]

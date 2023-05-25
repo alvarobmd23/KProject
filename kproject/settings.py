@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # External apps
     'fontawesomefree',
+    'widget_tweaks',
     # My apps
     'users.apps.UsersConfig',
     'modules.core',

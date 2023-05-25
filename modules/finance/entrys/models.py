@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from modules.core.models import TimeStampedModel
 from modules.finance.accounts.models import Analitic
@@ -15,11 +15,14 @@ class Document_Type(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     document_type = models.CharField(max_length=100)
 
-    def get_absolute_url(self):
-        return reverse("document_type:document_type")
+    class Meta:
+        ordering = ('document_type',)
 
     def __str__(self):
         return self.document_type
+
+    def get_absolute_url(self):
+        return reverse_lazy('entrys:document_type_detail', kwargs={'pk': self.pk})
 
 
 class Entry(TimeStampedModel):
@@ -39,7 +42,7 @@ class Entry(TimeStampedModel):
         return reverse('finance-update', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f"{self.date} {self.description} {self.total_value}"
+        return '{} - {} - {}'.format(self.date, self.description, self.total_value)
 
 
 class EntryItem(models.Model):

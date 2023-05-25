@@ -3,13 +3,13 @@
 {% block content %}
 
     <div class="col">
-        <h1>Deletar Sintetic Account - {{sintetic.sintetic}} </h1>
+        <h1>Delete Document Type - {{ object }} </h1>
         <form method="post">
         {% csrf_token %}
         {{ form }}
         <br/>
         <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> Confirmar</button>
-        <a class="btn btn-primary" href="{% url 'accounts:accounts' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
+        <a class="btn btn-primary" href="{% url 'entrys:document_type' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
         </form>
     </div>
 
