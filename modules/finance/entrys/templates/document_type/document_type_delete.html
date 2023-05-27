@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="col">
-        <h1>Delete Document Type - {{ object }} </h1>
+        <h1 class="text-dark">Delete Document Type - {{ object }} </h1>
         <form method="post">
         {% csrf_token %}
         {{ form }}

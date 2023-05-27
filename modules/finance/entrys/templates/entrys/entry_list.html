@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-header bg-light">
+    <h2 class="text-dark"><i class="fa-solid fa-money-bill-transfer"></i></i> Entrys</h2>
+</div>
+<br/>
+{% if object_list %}
+    <table class="table table-striped" style="z-index:999">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th class="text-center">Doc Type</th>
+                <th class="text-center">N. Doc</th>
+                <th class ="text-right">Total Value</th>
+                <th class="text-center">Employee</th>
+                <th class="text-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td><a href="{{ object.get_absolute_url }}">{{ object.date_formated }}</a></td>
+                <td class="text-center">{{ object.document_type }}</td>
+                <td class="text-center">{{ object.n_doc }}</td>
+                <td class ="text-right">{{ object.total_value }}</td>
+                <td class="text-center">{{ object.employee.name }}</td>
+                <td class="text-center">
+                    <a href="{% url 'entrys:entrys_edit' object.pk %}"><i class="fas fa-edit text-primary"></i></a>
+                    <a href="{% url 'entrys:entrys_delete' object.pk %}"><i class="fas fa-trash-alt text-danger"></i></a>
+                </td>
+            </tr>            
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% else %}
+    <p class="alert alert-warning">Sem tipos de documento cadastrado.</p>
+
+{% endif %}
+
+
+<div style="bottom:50px; right:30px; position:fixed; z-index:1000">
+    <div class="btn-group dropup position-relative float-right">
+        <button type="button" class="btn btn-primary btn-circle btn-xl rounded-circle text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item btn btn-secondary" href="{% url 'entrys:entrys_add' %}"><i class="fa-solid fa-plus text-primary"></i> Entry</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+

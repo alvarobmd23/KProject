@@ -16,7 +16,7 @@
 {% block content %}
 
 <div class="page-header bg-light">
-    <h2 class="d-inline">
+    <h2 class="d-inline text-dark">
         <i class="fa-regular fa-paste"></i>
         {% if object %}
          Document Type - {{ object }}
@@ -24,9 +24,6 @@
          Add - Document Type
         {% endif %} 
     </h2>
-    <span class="align-text-bottom float-right">
-        <a class="btn btn-danger" href="{% url 'entrys:document_type' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
-    </span>
 </div>
 
 <form method="POST" novalidate>
@@ -46,6 +43,7 @@
         </div>
     {% endfor %}
     <button type="submit" class="btn btn-success"><i class="fa-regular fa-circle-check"></i> Salvar</button>
+    <a class="btn btn-danger" href="{% url 'entrys:document_type'%}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
 </form>
 
 {% endblock content %}

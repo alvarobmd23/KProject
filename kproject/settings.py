@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # External apps
     'fontawesomefree',
     'widget_tweaks',
+    'bootstrapform',
     # My apps
     'users.apps.UsersConfig',
     'modules.core',

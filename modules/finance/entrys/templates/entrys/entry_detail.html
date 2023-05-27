@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="page-header bg-light" style="z-index:1000">
+    <h2 class="d-inline text-dark">
+        <i class="fa-solid fa-money-bill-transfer"></i> Entry - {{ object }}
+    </h2>
+    <span class="align-text-bottom float-right">
+        <a class="btn btn-danger" href="{% url 'entrys:entrys' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
+        <a class="btn btn-primary" href="{ url 'entrys:entrys_edit' object.pk %}"><i class="fas fa-edit"></i> Editar</a>
+    </span>
+</div>
+<br/>
+<div class="col-sm-12" style="z-index:999">
+    <table class="table table-user-information" style="z-index:999">
+        <tbody>
+            <tr>
+                <th class="text-right">Date</th>
+                <td class="text-left">{{ object.date_formated }}</td>
+                <th class="text-right">Total Value</th>
+                <td class="text-left">{{ object.total_value }}</td>
+            </tr>
+                
+            <tr>
+                <th class="text-right">{{ object.document_type }}</th>
+                <td class="text-left">{{ object.n_doc }}</td>
+                <th class="text-right">Employee</th>
+                <td class="text-left">{{ object.employee.name }}</td>               
+            </tr>
+
+            <tr>
+                <th class="text-right">Description</th>
+                <td colspan="3">{{ object.description }}</td>
+            </tr>
+            
+            <tr>
+                <th class="text-right">Obs</th>
+                <td colspan="3">{{ object.obs }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<table class="table table-striped" style="z-index:998">
+    <thead>
+        <tr>
+            <th>Movement Type</th>
+            <th>Account</th>
+            <th class="text-right">Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object.entrys.all %}
+            <tr>
+                <td>{% if obj.typemovement == 'd' %}Débito{% else %}Crédito{% endif %}</td>
+                <td>{{ obj.account }}</td>
+                <td class="text-right">{{ obj.value }}</td>
+            </tr>    
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
+
+
+
+

@@ -4,16 +4,16 @@
 
 {% block content %}
 
-<div class="page-header bg-light">
-    <h2 class="d-inline">
+<div class="page-header bg-light" >
+    <h2 class="d-inline text-dark">
         <i class="fa-regular fa-paste"></i> Document Type - {{ object }}
     </h2>
-    <span class="align-text-bottom float-right">
+    <span class="align-text-bottom float-right" style="z-index:1000">
         <a class="btn btn-danger" href="{% url 'entrys:document_type' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
         <a class="btn btn-primary" href="{% url 'entrys:document_type_edit' object.pk %}"><i class="fas fa-edit"></i> Editar</a>
     </span>
 </div>
-
+<br/>
 <div class="col-sm-6">
     <table class="table table-user-information">
         <tbody>

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="col">
-        <h1>Analitic Account - {{analitic.analitic}} </h1>
+        <h1 class="text-dark">Analitic Account - {{analitic.analitic}} </h1>
         <form method="post">
         {% csrf_token %}
         {{ form }}

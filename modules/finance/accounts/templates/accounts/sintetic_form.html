@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="col">
-        <h1>Sintetic Account - {{sintetic.sintetic}} </h1>
+        <h1 class="text-dark">Sintetic Account - {{sintetic.sintetic}} </h1>
         <form method="post">
         {% csrf_token %}
         {{ form }}
