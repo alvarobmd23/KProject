@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'widget_tweaks',
     'bootstrapform',
+
     # My apps
     'users.apps.UsersConfig',
     'modules.core',
@@ -114,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -145,3 +146,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+# Separador de valores de acordo com a região
+USE_L10N = True
+USE_THOUSAND_SEPARATOR = True

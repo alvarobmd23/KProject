@@ -32,14 +32,17 @@ class Entry(TimeStampedModel):
     document_type = models.ForeignKey(Document_Type, on_delete=models.PROTECT)
     n_doc = models.CharField(max_length=10)
     total_value = models.DecimalField(max_digits=15, decimal_places=2)
-    description = models.CharField(max_length=100, blank=True, null=True)
+    credit = models.DecimalField(max_digits=15, decimal_places=2)
+    debit = models.DecimalField(max_digits=15, decimal_places=2)
+    description = models.CharField(max_length=100)
     obs = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return '{} - {} {}'.format(self.date.strftime('%d/%m/%Y'), self.document_type, self.n_doc)
+        return '{} - {} {}'.format(
+            self.date.strftime('%d/%m/%Y'), self.document_type, self.n_doc)
 
     def get_absolute_url(self):
         return reverse_lazy('entrys:entrys_detail', kwargs={'pk': self.pk})
@@ -54,11 +57,11 @@ class EntryItem(models.Model):
     account = models.ForeignKey(Analitic, on_delete=models.PROTECT)
     typemovement = models.CharField(max_length=1, choices=TYPEMOVEMENT)
     value = models.DecimalField(max_digits=15, decimal_places=2)
-    validation = models.DecimalField(
-        max_digits=15, decimal_places=2, blank=True, null=True)
+    value_ref = models.DecimalField(max_digits=15, decimal_places=2)
 
     class Meta:
         ordering = ('pk',)
 
     def __str__(self):
-        return '{} - {} - {} - {} - {}'.format(self.pk, self.entry, self.typemovement, self.account, self.value)
+        return '{} - {} - {} - {} - {}'.format(
+            self.pk, self.entry, self.typemovement, self.account, self.value)

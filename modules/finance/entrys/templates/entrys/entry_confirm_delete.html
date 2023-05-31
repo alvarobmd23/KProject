@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="col">
+        <h1 class="text-dark">Delete Entry - {{ object }} </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br/>
+            <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> Confirmar</button>
+            <a class="btn btn-primary" href="{% url 'entrys:entrys' %}"><i class="fa-solid fa-rotate-left"></i> Voltar</a>
+            </form>
+        </div>
+    
+
+
+{% endblock content %}

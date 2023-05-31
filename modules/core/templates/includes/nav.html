@@ -6,6 +6,9 @@
         <img src="{% static 'images/logofav.png' %}" alt="Logo Kontrole" class="align-top" width="30" height="30">
         Kontrole
     </a>
+
+    {% if user.id %}
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,12 +30,29 @@
               </li>
 
         </ul>
-        <a class="ml-auto text-light text-decoration-none" href=""><i class="fa-regular fa-circle-user"></i> 
-        {% if user.name %}
-            {{user.name}}
-        {% else %}
-            {{user.email}}
-        {% endif %}
-        </a>
+
+
+
+
+        <div class="dropdown show">
+            <a class="ml-auto text-light text-decoration-none dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-regular fa-circle-user"></i> 
+                {% if user.name %}
+                    {{user.name}}
+                {% else %}
+                    {{user.email}}
+                {% endif %}
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a>
+            </div>
+          </div>
     </div>
+    {% else %}
+
+    <a type="button" class="btn btn-light ml-auto" href="{% url 'users:login' %}">LogIn</a>
+
+
+
+    {% endif %}
 </nav>

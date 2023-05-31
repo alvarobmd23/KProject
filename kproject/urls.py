@@ -22,6 +22,8 @@ from modules.core.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('users/',
+         include('users.urls', namespace='users')),
     path('finance/accounts/',
          include('modules.finance.accounts.urls', namespace='accounts')),
     path('finance/entrys/',

@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Document_Type, Entry, EntryItem
 
 admin.site.register(Document_Type)
+admin.site.register(EntryItem)
 
 
 class EntryItemInline(admin.TabularInline):

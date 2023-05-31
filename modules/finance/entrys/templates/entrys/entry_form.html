@@ -4,14 +4,7 @@
 {% load bootstrap %}
 
 {% block css %}
-
-<style>
-    span.required:after {
-        content: "*";
-        color: red;
-    }
-</style>
-
+<link rel="stylesheet" href="{% static 'css/entry.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -32,54 +25,135 @@
         <form method="POST" novalidate>
             {% csrf_token %}
             <div class="row">
-                <div class="col-sm-6">
-                {% for field in form.visible_fields %}
-                    <div class="form-group{% if fields.errors %} has error {% endif %}">
-                        <label for="{{ field.id_for_label }}">
-                            {% if field.field.required %}
-                                <span class="required">{{ field.label }}</span>
-                            {% else %}
-                                {{ field.label }}
-                            {% endif %}
-                        {% render_field field class="form-control"%}
-                        {% for error in field.errors %}
-                            <span class="text-muted">{{ error }}</span>
+
+                <div class="form-row col-sm-12">
+                    <!-- Date field -->
+                    <div class="form-group col-sm-4">
+                        <label>
+                            <span class="required">Date</span>
+                        </label>
+                        {{ form.date }}
+                        {% for error in form.date.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
                         {% endfor %}
                     </div>
-                    {% endfor %}
-                    {{ formset.management_form }}
+                    <!-- Document Type field -->                   
+                    <div class="form-group col-sm-3">
+                        <label>
+                            <span class="required">Document Type</span>
+                        </label>
+                        {{ form.document_type }}
+                        {% for error in form.document_type.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                <!-- Document Number field -->                    
+                    <div class="form-group col-sm-3">
+                        <label>
+                            <span class="required">Document Number</span>
+                        </label>
+                        {{ form.n_doc }}
+                        {% for error in form.n_doc.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <div class="form-row col-sm-12">
+                    <!-- Total Value field -->
+                    <div class="form-group col-sm-4">
+                        <label>
+                            <span class="required">Total Value</span>
+                        </label>
+                        {{ form.total_value }}
+                        {% for error in form.total_value.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <!-- Description field -->
+                    <div class="form-group col-sm-8">
+                        <label>
+                            <span class="required">Description</span>
+                        </label>
+                        {{ form.description }}
+                        {% for error in form.description.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-row col-sm-12">
+                    <!-- Observation field -->
+                    <div class="form-group col-sm-12">
+                        <label>
+                            <span>Observation</span>
+                        </label>
+                        {{ form.obs }}
+                        {% for error in form.obs.errors %}
+                            <br/>
+                            <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-
-            <div class="row">
+            
+            {{ formset.management_form }}     
+            <div class="row" style="margin-top: 10px;">
                 <div class="col-sm-12">
-                    <legend style="border-bottom: 1px solid #e5e5e5;">Accounts</legend>
+                    <div class="form-row col-sm-12" style="border-bottom: 1px solid #e5e5e5;">
+                        <h4 class="text-dark align-text-bottom">Accounts</h4>
+                        <div class="row ml-5">
+                            <!-- Credit -->
+                            <span class="align-bottom p-2">
+                                C 
+                            </span>
+                            <span class="align-middle">
+                                {{ form.credit }}
+                            </span>
+                            <!-- Debit -->
+                            <span class="align-bottom p-2">
+                                D 
+                            </span>
+                            <span class="align-middle">
+                                {{ form.debit }}
+                            </span>
+                        </div>
+                    </div>
+
+
+
                     <div id="entry" class="form-inline">
                         {% for item_entry_form in formset %}
-                            <div id="item-{{ forloop.counter0 }}" class="form-group">
+                            <div id="item-{{ forloop.counter0 }}" class="form-group" style="margin-top: 5px;">
                                 {{ item_entry_form|bootstrap }}
+                                <span id="-{{ forloop.counter0 }}" class="btn btn-danger clDel" style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
+                
             <span id="add-item" class="btn btn-info" style="margin-top: 10px;">
                 <i class="fa fa-plus"></i> Adicionar
             </span>
+            
             <div class="row float-right">
                 <div class="col-sm-12" style="margin-top: 10px;">
                     <div class="form-inline buttons">
-                        <button class="btn btn-primary">
-                            <i class="fa-regular fa-circle-check"></i>
-                             Salvar
-                        </button>
+                        <button type="submit" class="btn btn-success"><i class="fa-regular fa-circle-check"></i> Salvar</button>
                         <a class="btn btn-danger" href="{% url 'entrys:entrys'%}">
                             <i class="fa-solid fa-rotate-left"></i>
-                             Voltar
-                            </a>
+                            Cancelar
+                        </a>
                     </div>
                 </div>
             </div>
+            
         </form>
     </div>
 </div>
@@ -88,34 +162,15 @@
 {% endblock content %}
 
 {% block js %}
-<script>
-    $(document).ready(function(){
-        $('#add-item').click(function(ev) {
-            ev.preventDefault();
-            var count = $('#entry').children().length;
-            var tmplMarkup = $('#item-entry').html();
-            var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
-            $('div#entry').append(compiledTmpl);
-
-            // update form count
-            $('#id_entry-TOTAL_FORMS').attr('value', count + 1);
-
-            // some animate to scroll to view our new form
-            $('html, body').animate({
-                scrollTop: $("add-item").position().top - 200
-            }, 800);
-
-        });
-    });
-
-
-
-</script>
+<script src="{% static 'js/entry.js' %}"></script>
 <script type="text/html" id="item-entry">
-    <div id="item-__prefix__" class="form-group" style="margin-top: 10px;">
+    <div id="item-__prefix__" class="form-group" style="margin-top: 5px;">
         {{ formset.empty_form|bootstrap }}
+        <span id="-__prefix__" class="btn btn-danger clDel"  style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
+
     </div>
 </script>
+
 {% endblock js %}
 
 
