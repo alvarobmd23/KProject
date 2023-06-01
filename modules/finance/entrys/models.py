@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
 from modules.core.models import TimeStampedModel
 from modules.finance.accounts.models import Analitic
@@ -30,12 +30,12 @@ class Entry(TimeStampedModel):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     date = models.DateField()
     document_type = models.ForeignKey(Document_Type, on_delete=models.PROTECT)
-    n_doc = models.CharField(max_length=10)
+    n_doc = models.CharField(max_length=20)
     total_value = models.DecimalField(max_digits=15, decimal_places=2)
     credit = models.DecimalField(max_digits=15, decimal_places=2)
     debit = models.DecimalField(max_digits=15, decimal_places=2)
-    description = models.CharField(max_length=100)
-    obs = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=60)
+    obs = models.CharField(max_length=60, blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)

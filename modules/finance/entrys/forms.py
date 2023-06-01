@@ -65,14 +65,14 @@ class Entry_Form(forms.ModelForm):
             'credit': NumberInput(attrs={
                 'id': "credit",
                 'class': "form-control",
-                'style': 'max-width: 200px;',
+                'style': 'max-width: 125px;',
                 'placeholder': 'Credito',
                 'readonly': True
             }),
             'debit': NumberInput(attrs={
                 'id': "debit",
                 'class': "form-control",
-                'style': 'max-width: 200px;',
+                'style': 'max-width: 125px;',
                 'placeholder': 'Debito',
                 'readonly': True
             }),
@@ -92,7 +92,7 @@ class EntryItem_Form(forms.ModelForm):
             }),
             'value': NumberInput(attrs={
                 'class': "clSum",
-                'style': 'max-width: 200px;',
+                'style': 'max-width: 125px;',
                 'placeholder': 'Valor'
             }),
             'value_ref': NumberInput(attrs={
@@ -110,6 +110,7 @@ class EntryItem_Form(forms.ModelForm):
             'analitic')
         self.fields['value_ref'].label = ""
         self.fields['value_ref'].widget = forms.HiddenInput()
+
         self.fields['typemovement'].label = "Type"
         self.fields['account'].label = "Account"
         self.fields['value'].label = "Value"

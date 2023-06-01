@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     # My apps
     'users.apps.UsersConfig',
     'modules.core',
+    # My apps - FOUNDATION
+    'modules.foundation.persons',
     # My apps - FINANCE
     'modules.finance.accounts',
     'modules.finance.entrys',

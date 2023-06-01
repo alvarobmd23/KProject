@@ -28,5 +28,7 @@ urlpatterns = [
          include('modules.finance.accounts.urls', namespace='accounts')),
     path('finance/entrys/',
          include('modules.finance.entrys.urls', namespace='entrys')),
+    #   path('persons/',
+    #         include('modules.foundation.persons.urls', namespace='persons')),
 
 ]

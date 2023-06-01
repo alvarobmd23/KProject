@@ -121,7 +121,7 @@ def entrys_add(request):
                 messages.success(request,
                                  'Lançamento efetuado com sucesso!',
                                  'alert-success')
-                return HttpResponseRedirect(reverse_lazy('entrys:entrys'))
+                return HttpResponseRedirect(reverse_lazy('entrys:entrys_add'))
             else:
                 if form.credit != form.debit:
                     messages.warning(request,
