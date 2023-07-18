@@ -70,11 +70,28 @@ class PersonSeller(models.Model):
     commission = models.DecimalField(
         max_digits=3, decimal_places=0,
         default=0, validators=PERCENTAGE_VALIDATOR)
-    contactobs = models.CharField(max_length=60, blank=True, null=True)
+    sellerobs = models.CharField(max_length=60, blank=True, null=True)
 
     class Meta:
         ordering = ('pk',)
 
     def __str__(self):
-        return '{} - {} - {} - {}'.format(
-            self.pk, self.person, self.typecontact, self.contactdescription)
+        return '{} - {} - {}'.format(
+            self.pk, self.person, self.commission)
+
+
+class PersonCustomer(models.Model):
+    person = models.ForeignKey(
+        Person, on_delete=models.CASCADE)
+    fin_discount = models.DecimalField(
+        max_digits=3, decimal_places=0,
+        default=0, validators=PERCENTAGE_VALIDATOR)
+    payment_term = models.DecimalField(max_digits=3, decimal_places=0)
+    customerobs = models.CharField(max_length=60, blank=True, null=True)
+
+    class Meta:
+        ordering = ('pk',)
+
+    def __str__(self):
+        return '{} - {} - {}'.format(
+            self.pk, self.person, self.commission)

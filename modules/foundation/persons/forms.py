@@ -4,32 +4,22 @@ from django.forms import (DateInput, NumberInput, Select, TextInput,
 
 from modules.finance.accounts.models import Analitic
 
-from .models import Document_Type, Entry, EntryItem
+from .models import Person, PersonContact, PersonCustomer, PersonSeller
 
 
 class DateInputAuto(DateInput):
     input_type = 'date'
 
 
-class Document_Type_Form(forms.ModelForm):
-    class Meta:
-        model = Document_Type
-        fields = ['document_type']
-
-
-class Entry_Form(forms.ModelForm):
+class Person_Form(forms.ModelForm):
 
     def __init__(self, user, *args, **kwargs):
-        super(Entry_Form, self).__init__(*args, **kwargs)
+        super(Person_Form, self).__init__(*args, **kwargs)
         self.fields['document_type'].queryset = Document_Type.objects.filter(
             company=user.company)
-        # self.fields['credit'].label = 'value_ref'
-        # self.fields['credit'].widget = 'value_ref'
-        # self.fields['debit'].label = 'value_ref'
-        # self.fields['debit'].widget = 'value_ref'
 
     class Meta:
-        model = Entry
+        model = Person
         fields = ['date', 'document_type', 'n_doc',
                   'total_value', 'description', 'obs', 'credit', 'debit']
         widgets = {
@@ -88,15 +78,11 @@ class EntryItem_Form(forms.ModelForm):
         widgets = {
             'typemovement': Select(attrs={
                 'class': "clSum",
-                'style': 'max-width: 125px; margin-left: 10px; margin-right: 20px;',
-            }),
-            'account': Select(attrs={
-                'class': "clAccount",
-                'style': 'max-width: 600px;',
+                'style': 'max-width: 300px;',
             }),
             'value': NumberInput(attrs={
                 'class': "clSum",
-                'style': 'max-width: 125px; margin-left: 10px;',
+                'style': 'max-width: 125px;',
                 'placeholder': 'Valor'
             }),
             'value_ref': NumberInput(attrs={
@@ -115,6 +101,6 @@ class EntryItem_Form(forms.ModelForm):
         self.fields['value_ref'].label = ""
         self.fields['value_ref'].widget = forms.HiddenInput()
 
-        self.fields['typemovement'].label = ""
-        self.fields['account'].label = ""
-        self.fields['value'].label = ""
+        self.fields['typemovement'].label = "Type"
+        self.fields['account'].label = "Account"
+        self.fields['value'].label = "Value"

@@ -9,7 +9,7 @@ from .models import Analitic, Sintetic
 
 def accountsview(request):
     company_user = Sintetic.objects.filter(
-        company=request.user.company).order_by('typeaccount', 'sintetic', 'analitic')
+        company=request.user.company).order_by('typeaccount', 'sintetic', 'analitic__analitic')
     queryset = company_user.values(
         'company', 'company__company_name', 'typeaccount__typeaccount', 'sintetic', 'id', 'analitic__analitic', 'analitic__id').distinct()
     return render(request, 'accounts/accounts.html', {'objects': queryset})

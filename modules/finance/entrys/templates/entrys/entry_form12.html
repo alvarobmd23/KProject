@@ -124,32 +124,21 @@
                             </span>
                         </div>
                     </div>
-                    <table id="entry-table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <div class="row">
-                                        <span class='text-left' style='margin-left: 10px; width: 135px;'>Type</span>
-                                        <span class='text-left' style='width: 500px;'>Account</span>
-                                        <span class='text-left' style='margin-left: 15px; width: 125px;'>Value</span>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="entry-tbody">
-                            {% for item_entry_form in formset %}
-                                {{ item_entry_form.management_form }}
-                                <tr id="item-{{ forloop.counter0 }}" class="form-group">
-                                    <td class="align-middle">
-                                        <div class="row">
-                                        {{ item_entry_form|bootstrap }}
-                                        <span id="-{{ forloop.counter0 }}" class="btn btn-danger m-4 clDel" style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+
+
+
+                    <div id="entry" class="form-inline">
+                        {% for item_entry_form in formset %}
+                            <div id="item-{{ forloop.counter0 }}" class="form-group" style="margin-top: 5px;">
+                                {{ item_entry_form|bootstrap }}
+                                {% for error in formset.typemovement.errors %}
+                                <br/>
+                                <span style="color: red">*</span>
+                                {% endfor %}
+                                <span id="-{{ forloop.counter0 }}" class="btn btn-danger clDel" style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
                 
@@ -177,18 +166,13 @@
 {% endblock content %}
 
 {% block js %}
-
 <script src="{% static 'js/entry.js' %}"></script>
-
 <script type="text/html" id="item-entry">
-        <tr id="item-__prefix__" class="form-group">
-            <td class="align-middle">
-                <div class="row">
-                {{ formset.empty_form|bootstrap }}
-                <span id="-__prefix__" class="btn btn-danger m-4 clDel"  style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
-                </div>
-            </td>
-        </tr>
+    <div id="item-__prefix__" class="form-group" style="margin-top: 5px;">
+        {{ formset.empty_form|bootstrap }}
+        <span id="-__prefix__" class="btn btn-danger clDel"  style="margin-left: 5px;" onclick="itemDelete(this)"><i class="fas fa-trash-alt text-light"></i></span>
+
+    </div>
 </script>
 
 {% endblock js %}

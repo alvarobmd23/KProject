@@ -196,7 +196,10 @@ def entrys_edit(request, pk):
                     request.user,
                     instance=entry_form,
                     prefix='main')
-
+                formset = item_entry_formset(
+                    instance=entry_form,
+                    prefix='entry',
+                    form_kwargs={'user': request.user})
     else:
         form = Entry_Form(
             request.user,

@@ -7,7 +7,8 @@ class AnaliticForm(ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(AnaliticForm, self).__init__(*args, **kwargs)
         self.fields['sintetic'].queryset = Sintetic.objects.filter(
-            company=user.company).order_by('typeaccount__typeaccount', 'sintetic')
+            company=user.company).order_by(
+            'typeaccount__typeaccount', 'sintetic')
 
     class Meta:
         model = Analitic
